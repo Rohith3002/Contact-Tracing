@@ -1,8 +1,3 @@
-/**
- * CTPeopleTracingController
- * Main controller class for People_Tracing__c object
- * @author Manish
- */
 public with sharing class CTPeopleTracingController {
     public static List<People_Tracing__c> getTraces(String personId) {
         return [
