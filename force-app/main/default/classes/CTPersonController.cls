@@ -1,6 +1,7 @@
 /**
  * CTPersonController
  * Main controller class for Person__c object
+ * @author Manish
  */
 public with sharing class CTPersonController {
 
@@ -134,6 +135,19 @@ public with sharing class CTPersonController {
             }
         }
         return secondaryContacts;
+    }
+
+    public static Map<String, Integer> getHealthStatusCount(){
+        AggregateResult[] healthCountMap = [SELECT Health_Status__c, Count(Id) total FROM Person__c GROUP BY Health_Status__c];
+
+        if(healthCountMap != null && healthCountMap.size() > 0){
+            Map<String, Integer> result = new Map<String, Integer>();
+            for(AggregateResult ar : healthCountMap){
+                result.put(String.valueOf(ar.get('Health_Status__c')), Integer.valueOf(ar.get('total')));
+            }
+            return result;
+        }
+        return null;
     }
 
 }
